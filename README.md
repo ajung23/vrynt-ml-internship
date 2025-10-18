@@ -1,9 +1,14 @@
-# Vrynt ML Internship — Speech-to-Text & Generative Prototypes (2022)
+# Vrynt ML Internship — STT, Diffusion, Style Transfer (2022)
 
-Turnkey, recruiter-friendly showcase of my AI/ML work at **Vrynt** (Summer 2022).
-It includes an **AWS SageMaker** deployment path for a **Wav2Vec2** speech‑to‑text
-endpoint, a lightweight **Streamlit** demo app, and engineering notes from
-**CLIP‑guided diffusion** and on‑device feasibility studies.
+Speech-to-Text on SageMaker (Wav2Vec2) with a Streamlit client, CLIP‑guided diffusion, and neural style transfer prototypes. Includes OCI→AWS migration notes, runnable notebooks, and light CI.
+
+**Context.** Vrynt generated user‑requested images from text prompts with selectable art styles. Neural style transfer applied style presets to user images for fast, high‑quality results.
+
+**My role.**
+- Deployed Wav2Vec2 STT on Amazon SageMaker (endpoint + runbook) and shipped a Streamlit upload/inference client.
+- Prototyped CLIP‑guided diffusion and built a parameterized CLI/UI for reproducible image generation.
+- Implemented neural style transfer (VGG baseline) and documented usage.
+- Designed and documented the OCI→AWS pipeline (migration steps, integration patterns), enabling runtime style‑transfer operations.
 
 ## Highlights
 - **SageMaker endpoint (Wav2Vec2)** for real‑time STT with Hugging Face model artifacts; includes deploy script + handler stub.  
