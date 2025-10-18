@@ -5,18 +5,11 @@ It includes an **AWS SageMaker** deployment path for a **Wav2Vec2** speech‑to�
 endpoint, a lightweight **Streamlit** demo app, and engineering notes from
 **CLIP‑guided diffusion** and on‑device feasibility studies.
 
-> **Why this repo exists**: to demonstrate end‑to‑end execution—*from research notes,
-> to deployable endpoints, to a simple demo app that non‑engineers can use.*
-
----
-
 ## Highlights
 - **SageMaker endpoint (Wav2Vec2)** for real‑time STT with Hugging Face model artifacts; includes deploy script + handler stub.  
 - **Streamlit demo app** that accepts audio and invokes the SageMaker endpoint.  
 - **Engineering notes** summarizing diffusion/CLIP explorations and deployment runbooks, distilled into docs for fast reviewer access.  
 - **Reproducible path**: minimal infra assumptions; works from a dev laptop with AWS credentials set.
-
-> *Artifacts here are simplified for public sharing and scrubbed of any internal code or secrets.*
 
 ---
 
@@ -65,7 +58,6 @@ streamlit run app/streamlit_app.py --   --endpoint-name vrynt-stt-demo --region 
 ```
 
 ---
-
 
 ---
 
@@ -138,7 +130,6 @@ MIT (see `LICENSE`).
 
 ## Contact
 If you’d like to discuss the implementation details or see private, permissioned code, DM me on GitHub.
-
 
 ---
 ## Diffusion CLI
