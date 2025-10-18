@@ -1,7 +1,0 @@
-torch
-torchaudio
-librosa
-transformers
-datasets
-sentencepiece
-soundfile
