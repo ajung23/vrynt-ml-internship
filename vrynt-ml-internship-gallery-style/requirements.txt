@@ -1,0 +1,21 @@
+boto3
+streamlit
+requests
+numpy
+soundfile
+pydub
+
+# diffusion demo
+diffusers
+transformers
+accelerate
+safetensors
+Pillow
+
+# notebook eval
+jiwer
+nbformat
+
+# style transfer
+torch
+torchvision
