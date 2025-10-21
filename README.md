@@ -17,6 +17,24 @@ Speech-to-Text on SageMaker (Wav2Vec2) with a Streamlit client, CLIP‑guided di
 - **Reproducible path**: minimal infra assumptions; works from a dev laptop with AWS credentials set.
 
 ---
+# Vrynt ML Internship — Colab Notebooks
+
+This repo collects compact, reproducible notebooks for quick experiments in **ASR (wav2vec2)**, **CLIP-guided diffusion**, and **Neural Style Transfer (VGG)**. Each notebook is self-contained and ready to run on **Google Colab**.
+
+---
+
+##  Launch in Colab
+
+| Notebook | What it shows | Launch |
+|---|---|---|
+| **00_wav2vec2_feasibility.ipynb** | Speech-to-text feasibility using HuggingFace wav2vec2; quick latency/WER checks | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/00_wav2vec2_feasibility.ipynb) |
+| **10_clip_diffusion_expts.ipynb** | Text-guided image generation with CLIP guidance; simple ablations/seeds | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/10_clip_diffusion_expts.ipynb) |
+| **20_style_transfer_vgg.ipynb** | Classic neural style transfer (VGG19 content/style losses) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/20_style_transfer_vgg.ipynb) |
+
+> Tip: In Colab, set **Runtime → Change runtime type → GPU (T4)** for best performance.
+
+---
+
 
 ---
 
