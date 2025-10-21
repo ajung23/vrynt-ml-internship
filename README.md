@@ -102,23 +102,18 @@ streamlit run app/diffusion_app.py -- --model-id runwayml/stable-diffusion-v1-5
 ## Repo layout
 ```
 vrynt-ml-internship/
-├─ app/
-│  └─ streamlit_app.py          # simple demo client for audio upload + inference
-├─ aws/
-│  ├─ deploy_sagemaker_endpoint.py  # one-file deploy for HF Wav2Vec2
-│  ├─ inference.py                  # handler skeleton (TorchServe-style signature)
-│  └─ requirements.txt              # minimal server deps
-├─ docs/
-│  ├─ architecture.md           # concise diagrams + notes
-│  └─ SECURITY_AND_COSTS.md     # guardrails & rough cost footprint
-├─ notebooks/                   # (placeholders) repro exploration notebooks
-│  ├─ 00_wav2vec2_feasibility.ipynb
-│  └─ 10_clip_diffusion_expts.ipynb
-├─ scripts/                     # small utilities
-│  └─ transcribe_local.py
-├─ .gitignore
+├─ app/ # (optional) demo/app scaffolding
+├─ aws/ # infra helpers or notes
+├─ configs/ # config stubs (yaml/json)
+├─ docs/ # figures/writeups 
+├─ notebooks/
+│ ├─ 00_wav2vec2_feasibility.ipynb
+│ ├─ 10_clip_diffusion_expts.ipynb
+│ └─ 20_style_transfer_vgg.ipynb
+├─ outputs/ # notebook outputs (images/audio)
+├─ scripts/ # small utility scripts
+├─ requirements.txt # pinned deps
 ├─ LICENSE
-├─ requirements.txt             # local app reqs
 └─ README.md
 ```
 
