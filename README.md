@@ -1,4 +1,4 @@
-# Vrynt ML Internship — STT, Diffusion, Style Transfer (2022)
+# Vrynt ML Internship — STT, Diffusion, Style Transfer
 
 Speech-to-Text on SageMaker (Wav2Vec2) with a Streamlit client, CLIP‑guided diffusion, and neural style transfer prototypes. Includes OCI→AWS migration notes, runnable notebooks, and light CI.
 
