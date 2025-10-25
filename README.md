@@ -1,90 +1,17 @@
-# Vrynt ML Internship — STT, Diffusion, Style Transfer
+# Vrynt ML Internship — MLOps, ASR, and Diffusion
 
-Speech-to-Text on SageMaker (Wav2Vec2) with a Streamlit client, CLIP‑guided diffusion, and neural style transfer prototypes. Includes OCI→AWS migration notes, runnable notebooks, and light CI.
+This repository documents my internship work, which focused on bridging the gap between AI research and production-ready products.
 
-**Context.** Vrynt generated user‑requested images from text prompts with selectable art styles. Neural style transfer applied style presets to user images for fast, high‑quality results.
+My main project was to build a full **end-to-end MLOps pipeline** for a Speech-to-Text (ASR) model, deploying it as a scalable cloud service on **AWS SageMaker**.
 
-**My role.**
-- Deployed Wav2Vec2 STT on Amazon SageMaker (endpoint + runbook) and shipped a Streamlit upload/inference client.
-- Prototyped CLIP‑guided diffusion and built a parameterized CLI/UI for reproducible image generation.
-- Implemented neural style transfer (VGG baseline) and documented usage.
-- Designed and documented the OCI→AWS pipeline (migration steps, integration patterns), enabling runtime style‑transfer operations.
-
-## Highlights
-- **SageMaker endpoint (Wav2Vec2)** for real‑time STT with Hugging Face model artifacts; includes deploy script + handler stub.  
-- **Streamlit demo app** that accepts audio and invokes the SageMaker endpoint.  
-- **Engineering notes** summarizing diffusion/CLIP explorations and deployment runbooks, distilled into docs for fast reviewer access.  
-- **Reproducible path**: minimal infra assumptions; works from a dev laptop with AWS credentials set.
-
----
-# Vrynt ML Internship — Colab Notebooks
-
-This repo collects compact, reproducible notebooks for quick experiments in **ASR (wav2vec2)**, **CLIP-guided diffusion**, and **Neural Style Transfer (VGG)**. Each notebook is self-contained and ready to run on **Google Colab**.
+I also prototyped and built tools for **text-to-image diffusion** and **neural style transfer** to support the company's core product.
 
 ---
 
-##  Launch in Colab
+## Final Products: Streamlit Demo Apps
 
-| Notebook | What it shows | Launch |
-|---|---|---|
-| **00_wav2vec2_feasibility.ipynb** | Speech-to-text feasibility using HuggingFace wav2vec2; quick latency/WER checks | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/00_wav2vec2_feasibility.ipynb) |
-| **10_clip_diffusion_expts.ipynb** | Text-guided image generation with CLIP guidance; simple ablations/seeds | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/10_clip_diffusion_expts.ipynb) |
-| **20_style_transfer_vgg.ipynb** | Classic neural style transfer (VGG19 content/style losses) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/20_style_transfer_vgg.ipynb) |
+To prove the success of the pipelines, I built interactive Streamlit apps. These apps allowed the entire team (technical and non-technical) to test the live AI models.
 
-> Tip: In Colab, set **Runtime → Change runtime type → GPU (T4)** for best performance.
-
----
-
-
----
-
-## Results Gallery
-Example outputs are shown below for quick visual scanning on GitHub. When you run the CLI or Streamlit app,
-new images will be saved to `outputs/` and can be added here as needed.
-
-<p align="center">
-  <img src="outputs/gallery_01.png" width="30%"/>
-  <img src="outputs/gallery_02.png" width="30%"/>
-  <img src="outputs/gallery_03.png" width="30%"/>
-  <br/>
-  <img src="outputs/gallery_04.png" width="30%"/>
-  <img src="outputs/gallery_05.png" width="30%"/>
-  <img src="outputs/gallery_06.png" width="30%"/>
-</p>
-
-## Quickstart
-
-### 1) Clone & environment
-```bash
-git clone https://github.com/ajung23/vrynt-ml-internship.git
-cd vrynt-ml-internship
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-### 2) Configure AWS credentials
-Use an IAM role with permission for SageMaker, S3, and CloudWatch Logs.
-```bash
-aws configure
-# or set env vars: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION
-```
-
-### 3) (Option A) Deploy a Hugging Face Wav2Vec2 endpoint
-```bash
-python aws/deploy_sagemaker_endpoint.py   --model-id facebook/wav2vec2-base-960h   --endpoint-name vrynt-stt-demo   --instance-type ml.m5.xlarge
-```
-
-### 4) (Option B) Use an existing endpoint
-If you already have an endpoint (e.g., `vrynt-stt-demo`), skip deploy and go straight to the app:
-```bash
-streamlit run app/streamlit_app.py --   --endpoint-name vrynt-stt-demo --region us-east-1
-```
-
----
-
----
-
-## Screenshots
 <p align="center">
   <img src="docs/screenshot_streamlit_stt.png" alt="STT Streamlit UI" width="45%"/>
   &nbsp;&nbsp;
@@ -93,69 +20,93 @@ streamlit run app/streamlit_app.py --   --endpoint-name vrynt-stt-demo --region 
 
 ---
 
-## Diffusion demo (optional)
-Run the lightweight Streamlit UI for text-to-image (CPU or GPU):
+## My Role & Responsibilities
 
+* **MLOps (ASR):** Deployed a `Wav2Vec2` model to a real-time **AWS SageMaker** endpoint, wrote the deployment runbook, and built the Streamlit client to invoke the live API.
+* **Prototyping (Diffusion):** Built a parameterized Streamlit app and CLI for reproducible text-to-image generation with CLIP-guided diffusion.
+* **Implementation (Style Transfer):** Implemented a VGG-based neural style transfer pipeline for fast style-preset application.
+* **Cloud Architecture:** Designed and documented the data flow for an OCI-to-AWS migration, enabling runtime operations.
+
+---
+
+## 1. MLOps: ASR Quickstart (Deploy & Run)
+
+This guide shows how to deploy the ASR model to SageMaker and run the Streamlit app.
+
+### Step 1) Clone & Environment
 ```bash
-streamlit run app/diffusion_app.py -- --model-id runwayml/stable-diffusion-v1-5
+git clone [https://github.com/ajung23/vrynt-ml-internship.git](https://github.com/ajung23/vrynt-ml-internship.git)
+cd vrynt-ml-internship
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 ```
-## Repo layout
+
+### Step 2) Configure AWS Credentials
+Use an IAM role with permission for SageMaker, S3, and CloudWatch Logs.
+```bash
+aws configure
+# or set env vars: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION
+```
+
+### Step 3) Deploy the SageMaker Endpoint
+This script deploys the Hugging Face `Wav2Vec2` model.
+```bash
+python aws/deploy_sagemaker_endpoint.py \
+  --model-id facebook/wav2vec2-base-960h \
+  --endpoint-name vrynt-stt-demo \
+  --instance-type ml.m5.xlarge
+```
+
+### Step 4) Run the Streamlit App
+This app connects to the endpoint you just deployed.
+```bash
+streamlit run app/streamlit_app.py -- \
+  --endpoint-name vrynt-stt-demo \
+  --region us-east-1
+```
+*(Note: You can also use `--model-id` in the `diffusion_app.py` script to run the text-to-image demo.)*
+
+---
+
+## 2. Research Notebooks (Launch in Colab)
+
+This repo also collects the compact, reproducible notebooks used for the initial research and feasibility testing. Each is self-contained and ready to run on Google Colab.
+
+| Notebook | What it shows | Launch |
+|---|---|---|
+| **00_wav2vec2_feasibility.ipynb** | Speech-to-text feasibility using HuggingFace `wav2vec2`; quick latency/WER checks | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/00_wav2vec2_feasibility.ipynb) |
+| **10_clip_diffusion_expts.ipynb** | Text-guided image generation with CLIP guidance; simple ablations/seeds | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/10_clip_diffusion_expts.ipynb) |
+| **20_style_transfer_vgg.ipynb** | Classic neural style transfer (VGG19 content/style losses) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/20_style_transfer_vgg.ipynb) |
+
+> *Tip: In Colab, set **Runtime → Change runtime type → GPU (T4)** for best performance.*
+
+---
+
+## Technical Details
+
+### ASR Demo: How it Works
+1.  User uploads a `.wav` / `.mp3` file in the Streamlit UI.
+2.  Client serializes the audio bytes with `application/x-audio` content type.
+3.  `boto3` calls the SageMaker endpoint.
+4.  The endpoint's `inference.py` script deserializes the audio, runs inference, and returns the transcript JSON.
+5.  UI prints the transcript and shows the latency.
+
+### Tech Stack
+* **Cloud & MLOps**: AWS SageMaker (endpoint), S3 (artifacts), Boto3
+* **AI Models**: `Wav2Vec2` (HF), CLIP-Guided Diffusion, VGG (Style Transfer)
+* **App**: Streamlit
+* **Ops**: Single-file deploy scripts, structured runbooks, CI
+
+### Repo Layout
 ```
 vrynt-ml-internship/
-├─ app/ # (optional) demo/app scaffolding
-├─ aws/ # infra helpers or notes
-├─ configs/ # config stubs (yaml/json)
-├─ docs/ # figures/writeups 
+├─ app/         # Streamlit apps (STT and Diffusion)
+├─ aws/         # AWS deployment scripts (SageMaker)
+├─ docs/        # Screenshots and architecture notes
 ├─ notebooks/
 │ ├─ 00_wav2vec2_feasibility.ipynb
 │ ├─ 10_clip_diffusion_expts.ipynb
 │ └─ 20_style_transfer_vgg.ipynb
-├─ outputs/ # notebook outputs (images/audio)
-├─ scripts/ # small utility scripts
-├─ requirements.txt # pinned deps
-├─ LICENSE
+├─ requirements.txt
 └─ README.md
 ```
-
----
-
-## Tech stack
-- **Model**: Wav2Vec2 base 960h (HF) for STT
-- **Cloud**: AWS SageMaker (endpoint), S3 for model/artifacts, CloudWatch Logs
-- **App**: Streamlit client (audio upload -> invoke endpoint via `boto3`)
-- **Ops**: Single‑file deploy, structured logs, minimal infra assumptions
-
----
-
-## Demo: how it works
-1. User uploads `.wav` / `.mp3` file in the Streamlit UI.  
-2. Client serializes bytes with `application/x-audio` content type and calls the endpoint.  
-3. Endpoint deserializes audio, runs inference with Wav2Vec2, and returns the transcript JSON.  
-4. UI prints transcript and shows basic latency.
-
----
-
-## Notes & context
-- The STT plan and deploy steps mirror the runbook I wrote during the internship (public, redacted version in `docs/`).
-- I also explored **CLIP + diffusion** pipelines and on‑device inference to inform early experiments and business demos—captured briefly in `docs/architecture.md` for context.
-
----
-
-## License
-MIT (see `LICENSE`).
-
----
-
-## Contact
-If you’d like to discuss the implementation details or see private, permissioned code, DM me on GitHub.
-
----
-## Diffusion CLI
-
-Use a small, dependency-light wrapper around **diffusers** to reproduce text-to-image and img2img experiments.
-
-```bash
-python scripts/diffusion_cli.py --prompt "clean studio product mockup" --steps 30 --guidance-scale 7.5
-```
-
-See `docs/clip_guided_diffusion.md` for parameter mapping and tips.
