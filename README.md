@@ -1,16 +1,16 @@
-# Vrynt ML Internship — MLOps, ASR, and Diffusion
+# Vrynt ML Internship: MLOps & OCI-to-AWS Migration
 
-This repository documents my internship work, which focused on bridging the gap between AI research and production-ready products.
+This repository documents my internship, which was focused on a critical business objective: **evaluating and migrating the company's AI infrastructure from Oracle Cloud (OCI) to Amazon Web Services (AWS).**
 
-My main project was to build a full **end-to-end MLOps pipeline** for a Speech-to-Text (ASR) model, deploying it as a scalable cloud service on **AWS SageMaker**.
+My primary role was to act as an MLOps engineer, proving the viability of AWS for the company's AI workloads. I did this by building a complete, end-to-end pipeline for a real-time Speech-to-Text (ASR) model, deploying it as a scalable cloud service on **AWS SageMaker**.
 
-I also prototyped and built tools for **text-to-image diffusion** and **neural style transfer** to support the company's core product.
+I was responsible for the entire project lifecycle: from initial evaluation and cloud architecture design to deploying the final application and writing the comprehensive migration documentation for the rest of the engineering team.
 
 ---
 
-## Final Products: Streamlit Demo Apps
+## Final Products: Deployed Endpoint & Streamlit Demo
 
-To prove the success of the pipelines, I built interactive Streamlit apps. These apps allowed the entire team (technical and non-technical) to test the live AI models.
+To prove the success of the migration, I built a production-grade ASR service on SageMaker and a front-end Streamlit app to interact with it. This allowed the entire team to test the performance, cost, and stability of the new AWS-based infrastructure.
 
 <p align="center">
   <img src="docs/screenshot_streamlit_stt.png" alt="STT Streamlit UI" width="45%"/>
@@ -22,10 +22,11 @@ To prove the success of the pipelines, I built interactive Streamlit apps. These
 
 ## My Role & Responsibilities
 
-* **MLOps (ASR):** Deployed a `Wav2Vec2` model to a real-time **AWS SageMaker** endpoint, wrote the deployment runbook, and built the Streamlit client to invoke the live API.
-* **Prototyping (Diffusion):** Built a parameterized Streamlit app and CLI for reproducible text-to-image generation with CLIP-guided diffusion.
-* **Implementation (Style Transfer):** Implemented a VGG-based neural style transfer pipeline for fast style-preset application.
-* **Cloud Architecture:** Designed and documented the data flow for an OCI-to-AWS migration, enabling runtime operations.
+* **Cloud Migration (OCI → AWS):** Evaluated OCI services and designed a migration path to AWS, focusing on building a scalable, robust, and cost-effective solution.
+* **MLOps (ASR):** Deployed a `Wav2Vec2` model to a real-time **AWS SageMaker** endpoint and wrote the deployment runbook.
+* **Application:** Built the Streamlit client to invoke the live SageMaker API, handling real-time data streams.
+* **Documentation:** Created comprehensive documentation detailing the entire migration process, from evaluation to deployment, to ensure consistency and quality for the team.
+* **Prototyping:** I also prototyped text-to-image (Diffusion) and style-transfer models to support other product goals.
 
 ---
 
@@ -64,19 +65,18 @@ streamlit run app/streamlit_app.py -- \
   --endpoint-name vrynt-stt-demo \
   --region us-east-1
 ```
-*(Note: You can also use `--model-id` in the `diffusion_app.py` script to run the text-to-image demo.)*
 
 ---
 
 ## 2. Research Notebooks (Launch in Colab)
 
-This repo also collects the compact, reproducible notebooks used for the initial research and feasibility testing. Each is self-contained and ready to run on Google Colab.
+These are the reproducible notebooks I used for initial research and feasibility testing for the company's various AI initiatives.
 
 | Notebook | What it shows | Launch |
 |---|---|---|
-| **00_wav2vec2_feasibility.ipynb** | Speech-to-text feasibility using HuggingFace `wav2vec2`; quick latency/WER checks | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/00_wav2vec2_feasibility.ipynb) |
-| **10_clip_diffusion_expts.ipynb** | Text-guided image generation with CLIP guidance; simple ablations/seeds | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/10_clip_diffusion_expts.ipynb) |
-| **20_style_transfer_vgg.ipynb** | Classic neural style transfer (VGG19 content/style losses) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/20_style_transfer_vgg.ipynb) |
+| **00_wav2vec2_feasibility.ipynb** | Speech-to-text feasibility (latency/WER checks) before SageMaker deployment. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/00_wav2vec2_feasibility.ipynb) |
+| **10_clip_diffusion_expts.ipynb** | Text-guided image generation (CLIP) research for product prototyping. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/10_clip_diffusion_expts.ipynb) |
+| **20_style_transfer_vgg.ipynb** | Classic neural style transfer (VGG) for fast style-preset application. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/20_style_transfer_vgg.ipynb) |
 
 > *Tip: In Colab, set **Runtime → Change runtime type → GPU (T4)** for best performance.*
 
@@ -92,9 +92,9 @@ This repo also collects the compact, reproducible notebooks used for the initial
 5.  UI prints the transcript and shows the latency.
 
 ### Tech Stack
-* **Cloud & MLOps**: AWS SageMaker (endpoint), S3 (artifacts), Boto3
+* **Cloud & MLOps**: AWS SageMaker, S3 (artifacts), CloudWatch Logs, Boto3
 * **AI Models**: `Wav2Vec2` (HF), CLIP-Guided Diffusion, VGG (Style Transfer)
-* **App**: Streamlit
+* **App & Data**: Streamlit, Pandas, Librosa, Jiwer (for WER/CER)
 * **Ops**: Single-file deploy scripts, structured runbooks, CI
 
 ### Repo Layout
@@ -107,6 +107,7 @@ vrynt-ml-internship/
 │ ├─ 00_wav2vec2_feasibility.ipynb
 │ ├─ 10_clip_diffusion_expts.ipynb
 │ └─ 20_style_transfer_vgg.ipynb
+├─ outputs/     # Generated images from notebooks
 ├─ requirements.txt
 └─ README.md
 ```
