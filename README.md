@@ -75,7 +75,7 @@ These are the reproducible notebooks I used for initial research and feasibility
 | Notebook | What it shows | Launch |
 |---|---|---|
 | **00_wav2vec2_feasibility.ipynb** | Speech-to-text feasibility (latency/WER checks) before SageMaker deployment. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/00_wav2vec2_feasibility.ipynb) |
-| **10_clip_diffusion_expts.ipynb** | Text-guided image generation (CLIP) research for product prototyping. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/10_clip_diffusion_expts.ipynb) |
+| **10_clip_diffusion_expts.ipynb** | Text-guided image generation (CLIP) research for product prototyping. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/10_clip_diffusion_expts_fixed.ipynb) |
 | **20_style_transfer_vgg.ipynb** | Classic neural style transfer (VGG) for fast style-preset application. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ajung23/vrynt-ml-internship/blob/main/notebooks/20_style_transfer_vgg.ipynb) |
 
 > *Tip: In Colab, set **Runtime → Change runtime type → GPU (T4)** for best performance.*
